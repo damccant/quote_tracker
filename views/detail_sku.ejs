@@ -1,0 +1,59 @@
+<%- include('header.ejs') %>
+
+<center>
+	<div class="jumbotron">
+		<h1><%= info.sku %></h1>
+	</div>
+</center>
+<div class="span9 offset1">
+	<form id="form">
+		<div class="row">
+			<a class="btn btn-lg btn-block" href="/sku/excel/<%= info.sku %>">
+				<i class="bi bi-file-spreadsheet"></i>
+				Export to Excel
+			</a>
+		</div>
+		<div class="form-group row">
+			<label class="col-sm-2 col-form-label" for="sku">SKU</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="sku" placeholder="<%= info.sku %>" value="<%= info.sku %>">
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-sm-2 col-form-label" for="description">Description</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="description" placeholder="<%= info.description %>" value="<%= info.description %>">
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-sm-2 col-form-label" for="notes">Notes</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="notes" placeholder="<%= info.notes ?? "Descriptive notes" %>" value="<%= info.notes %>">
+			</div>
+		</div>
+	</form>
+	<div class="row">
+		<div class="table-responsive">
+			<table class="table table-bordered table-striped table-hover align-middle">
+				<tr>
+					<th>Date/Time</th>
+					<th>Order</th>
+					<th>Order Quantity</th>
+					<th>Running Total</th>
+				</tr>
+				<% var total = 0; for(const r of qty_detail.rows) { total += parseInt(r.qty); %>
+					<tr>
+						<td><%= r.created %></td>
+						<td>
+							<a href="/order/detail/<%= r.id %>"><%= r.id %></a>
+						</td>
+						<td><%= r.qty %></td>
+						<td><%= total %></td>
+					</tr>
+				<% } %>
+			</table>
+		</div>
+	</div>
+</div>
+
+<%- include('footer.ejs') %>

@@ -1,0 +1,11 @@
+			<br><br>
+			<footer class="footer">
+				<p class="pull-right" style="margin-top: -14px">Made by Derek McCants</p>
+			</footer>
+		</div> <!-- container -->
+		<script src="/js/bootstrap.min.js"></script>
+		<% if(typeof additional_scripts !== 'undefined') for(const s of additional_scripts) { %>
+			<script src="<%= s %>"></script>
+		<% } %>
+	</body>
+</html>

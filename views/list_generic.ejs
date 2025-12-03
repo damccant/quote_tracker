@@ -1,0 +1,13 @@
+<%- include('header.ejs') %>
+
+<center>
+	<div class="jumbotron">
+		<h1>Current <%= item %>s (Page <%= page %> of <%= page_count %>)</h1>
+	</div>
+</center>
+<div class="span9 offset1">
+	<a href="/sku/create" class="btn btn-primary">Create a new <%= item %>...</a>
+	<%- include('edit_table.ejs') %>
+</div>
+
+<%- include('footer.ejs', {additional_scripts: ["/js/edit_sku.js"]}) %>

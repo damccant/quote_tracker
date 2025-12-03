@@ -1,0 +1,25 @@
+{
+  "name": "quote_tracker",
+  "version": "1.0.0",
+  "description": "Quote Inventory Tracker",
+  "license": "MIT",
+  "author": "Derek McCants",
+  "type": "commonjs",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/damccant/quote_tracker.git"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@eonasdan/tempus-dominus": "^6.10.4",
+    "bootstrap": "^5.3.8",
+    "bootstrap-icons": "^1.13.1",
+    "ejs": "^3.1.10",
+    "exceljs": "^4.4.0",
+    "express": "^5.1.0",
+    "pg": "^8.16.3"
+  }
+}

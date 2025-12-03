@@ -1,0 +1,43 @@
+<div class="table-responsive">
+	<table class="table table-bordered table-striped table-hover align-middle">
+		<tr>
+			<% for(const c of columns) { %>
+				<th>
+					<%= c.pretty_name %>
+				</th>
+			<% } %>
+			<th></th>
+		</tr>
+		<% for(var y = 0; y < rows.length; ++y) { %>
+			<tr id="e_r_<%= y %>">
+				<% for(const c of columns) { %>
+					<td id="e_<%= y + '_' + c.name %>">
+						<% if(typeof c.link !== 'undefined') { %>
+							<a href="<%= c.link(rows[y]) %>"><%= rows[y][c.name] %></a>
+						<% } else { %>
+							<%= rows[y][c.name] %>
+						<% } %>
+					</td>
+				<% } %>
+				<td style="width: 1px;">
+					<div style="white-space: nowrap;">
+						<button id="e_e_<%= y %>" class="btn btn-sm" onclick="saved_edit_to_unsaved('<%= y %>')">
+							<i class="bi bi-pencil"></i>
+						</button>
+						<button id="s_d_<%= y %>" class="btn btn-sm" onclick="saved_to_deleted('<%= y %>')">
+							<i class="bi bi-trash"></i>
+						</button>
+					</div>
+				</td>
+			</tr>
+		<% } %>
+		<tr id="newrow">
+			<td colspan="<%= columns.length + 1 %>">
+				<button style="width:100%;" class="btn btn-lg btn-block" onclick="new_row();">
+					<i class="bi bi-plus-lg"></i>
+					Create new <%= item %>
+				</button>
+			</td>
+		</tr>
+	</table>
+</div>

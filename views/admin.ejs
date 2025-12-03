@@ -1,0 +1,27 @@
+<%- include('header.ejs') %>
+
+<center>
+	<div class="jumbotron">
+		<h1>Admin page</h1>
+	</div>
+</center>
+<div class="span9 offset1">
+	<div class="alert alert-warning" role="alert">
+		<i class="bi bi-exclamation-triangle"></i>
+		Do not use this page unless you know what you are doing! <a href="/">Back to safety</a>
+	</div>
+	Select an option from the following:
+	<ul>
+		<li>
+			<a href="/admin/reset">Reset the database</a>
+		</li>
+		<li>
+			<a href="/admin/excel">Download a copy of the database (as Excel)</a>
+		</li>
+		<li>
+			<a href="/admin/dummy">Insert random dummy data</a>
+		</li>
+	</ul>
+</div>
+
+<%- include('footer.ejs') %>
