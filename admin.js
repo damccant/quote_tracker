@@ -31,7 +31,7 @@ async function publicDummyData(req, res)
 	}
 	else if(req.method === 'POST') {
 		await data.testData();
-		res.redirect("/sku/list/1");
+		res.redirect("/sku/list/100/1");
 	}
 }
 

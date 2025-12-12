@@ -21,15 +21,17 @@ function registerEndpoints(app)
 				{name: 'notes', pretty_name: "Notes"}
 			],
 			'/sale/excel/',
-			{
-				list_sql: 'SELECT qty, skus.sku, skus.description FROM sales_tickets_skus LEFT JOIN skus ON skus.sku = sales_tickets_skus.sku WHERE sales_ticket = $1;',
-				columns: [
-					{name: "qty", pretty_name: "Qty"},
-					{name: "sku", pretty_name: "SKU", link: (r) => '/sku/detail/' + r.sku},
-					{name: "description", pretty_name: "Description"},
-				],
-				item: "SKU"
-			}
+			[
+				{
+					list_sql: 'SELECT qty, skus.sku, skus.description FROM sales_tickets_skus LEFT JOIN skus ON skus.sku = sales_tickets_skus.sku WHERE sales_ticket = $1;',
+					columns: [
+						{name: "qty", pretty_name: "Qty"},
+						{name: "sku", pretty_name: "SKU", link: (r) => '/sku/detail/' + r.sku},
+						{name: "description", pretty_name: "Description"},
+					],
+					item: "SKU"
+				}
+			]
 		));
 }
 

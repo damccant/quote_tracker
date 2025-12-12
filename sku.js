@@ -1,6 +1,8 @@
 const pool = require('./pool.js').pool;
 const excel = require('exceljs');
 const entity = require('./entity.js');
+const fs = require('fs');
+const sku_summary_query = fs.readFileSync('sku.sql').toString();
 
 function registerEndpoints(app)
 {
@@ -11,6 +13,43 @@ function registerEndpoints(app)
 		[
 			{name: 'sku', pretty_name: 'SKU', link: (r) => '/sku/detail/' + r.sku},
 			{name: 'description', pretty_name: 'Description'},
+		]
+	));
+	app.get('/sku/detail/:id', entity.publicDetailGeneric(
+		'SELECT sku AS name,description,notes FROM skus WHERE sku = $1;',
+		[
+			{name: 'name', pretty_name: 'SKU'},
+			{name: 'description', pretty_name: 'Description'},
+			{name: 'notes', pretty_name: 'Notes'}
+		],
+		'/sku/excel/',
+		[
+			{
+				list_sql: sku_summary_query,
+				columns: [
+					{name: 'deviation_id', pretty_name: 'Deviation', link_w_info: (i, r) => `/deviation/sku/${r.deviation_id}/${i.name}`},
+					{name: 'price', pretty_name: 'Price'},
+					{name: 'total', pretty_name: 'Total'},
+					{name: 'allocated', pretty_name: 'Allocated'},
+					{name: 'floating', pretty_name: 'Floating'},
+					{name: 'sold', pretty_name: 'Sold'}
+				],
+				item: "Deviation"
+			},
+			{
+				list_sql: 'SELECT deviation_id, qty, price FROM deviations_skus WHERE sku = $1;',
+				columns: [
+					{name: "qty", pretty_name: "Qty"},
+					{name: "sku", pretty_name: "SKU", link: (r) => '/sku/detail/' + r.sku},
+					{name: "description", pretty_name: "Description"},
+				],
+				item: "Deviation"
+			},
+			/*{
+				list_sql: 'SELECT deviation_id,job_name,job_skus.qty,price FROM job_skus LEFT JOIN jobs ON jobs.name = job_skus.job_name WHERE sku = $1;'
+
+			},*/
+
 		]
 	));
 }

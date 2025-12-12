@@ -12,7 +12,9 @@
 			<tr id="e_r_<%= y %>">
 				<% for(const c of columns) { %>
 					<td id="e_<%= y + '_' + c.name %>">
-						<% if(typeof c.link !== 'undefined') { %>
+						<% if(typeof c.link_w_info !== 'undefined') { %>
+							<a href="<%= c.link_w_info(info, rows[y]) %>"><%= rows[y][c.name] %></a>
+						<% } else if(typeof c.link !== 'undefined') { %>
 							<a href="<%= c.link(rows[y]) %>"><%= rows[y][c.name] %></a>
 						<% } else { %>
 							<%= rows[y][c.name] %>

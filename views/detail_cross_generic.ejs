@@ -2,16 +2,17 @@
 
 <center>
 	<div class="jumbotron">
-		<h1><%= info.name %></h1>
+		<h1>
+			<%= keys.map(k => multi[k]).join(" - ") %>
+		</h1>
 	</div>
 </center>
 <div class="span9 offset1">
 	<form id="form">
 		<div class="row">
-			<a class="btn btn-lg btn-block" href="<%= excel_url %>">
-				<i class="bi bi-file-spreadsheet"></i>
-				Export to Excel
-			</a>
+			<% for(const k of keys) { %>
+				<a href="#">Examine <%= multi[k] %></a>
+			<% } %>
 		</div>
 		<% for(const c of columns) { %>
 			<div class="form-group row">
